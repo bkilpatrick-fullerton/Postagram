@@ -7,7 +7,7 @@ import Register from './components/Register'
 const App = () => {
   return (
     <div className="App">
-      <h1>Postagram Login</h1>
+      <h1>Postagram!</h1>
       <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
