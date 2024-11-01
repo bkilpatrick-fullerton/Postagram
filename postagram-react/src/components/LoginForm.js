@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
-import './LoginForm.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
+import './LoginForm.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Simulate login attempt (replace with API call in future)
+    // Simulate login attempt (replace with actual API call in the future)
     console.log('Trying to login:', username, password);
-    setUsername('');
-    setPassword('');
+
+    // mock validation
+    if (username === 'post' && password === 'gram') {
+      setUsername('');
+      setPassword('');
+      setError('');
+      navigate('/home');
+    } else {
+      setError('Invalid username or password');
+    }
+  };
+
+  const handleRegisterRedirect = () => {
+    navigate('/register');
   };
 
   return (
@@ -25,7 +40,7 @@ const LoginForm = () => {
           </ul>
         </div>
       </div>
-      <div className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -40,8 +55,13 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {error && <p className="error">{error}</p>}
         <button type="submit">Login</button>
-      </div>
+
+        <button type="button" onClick={handleRegisterRedirect} className="register-button">
+          Register
+        </button>
+      </form>
     </>
   );
 };
