@@ -13,8 +13,7 @@ import {
 
 const userRoute = Router();
 
-userRoute.post("/login", login)
-userRoute.put("/signup", signup);
+
 userRoute.post("/follow/", authenticate, follow);
 userRoute.post("/unfollow/", authenticate, unfollow);
 

@@ -1,0 +1,16 @@
+aaron C.0.R.S
+
+raymond modles
+-post
+-user
+
+jack auth
+-auth route 
+-user route needs to auth
+-signup takes info from from and post to back end, hash pass and store in db 
+-sign in grab user and pass and call db to verify they match
+
+kevin middleware
+-verify jwt
+-add jwt to request to every controller
+
