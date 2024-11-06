@@ -66,7 +66,7 @@ RESPONSE:
 ###########################
 
 GET:
-http://localhost:3000/posts/hashtag/eggs
+http://localhost:3001/posts/hashtag/eggs
 
 PAYLOAD:
 none
@@ -127,7 +127,7 @@ RESPONSE:
 #############################
 
 GET:
-http://localhost:3000/posts/user/@BrandonK
+http://localhost:3001/posts/user/@BrandonK
 
 PAYLOAD:
 none
@@ -165,7 +165,7 @@ RESPONSE:
 ###################
 
 PUT:
-http://localhost:3000/posts/add-post
+http://localhost:3001/posts/add-post
 
 PAYLOAD:
        {
@@ -194,7 +194,7 @@ RESPONSE:
 ######################
 
 DELETE:
-http://localhost:3000/posts/delete-post
+http://localhost:3001/posts/delete-post
 
 PAYLOAD:
 {
@@ -230,7 +230,7 @@ RESPONSE:
 ##################
 
 POST:
-http://localhost:3000/user/follow
+http://localhost:3001/user/follow
 
 PAYLOAD:
 {
@@ -247,7 +247,7 @@ RESPONSE:
 ##################s
 
 POST:
-http://localhost:3000/user/unfollow
+http://localhost:3001/user/unfollow
 
 PAYLOAD:
 {
@@ -264,7 +264,7 @@ RESPONSE:
 ##################
 
 PUT:
-http://localhost:3000/user/signup
+http://localhost:3001/user/signup
 
 PAYLOAD:
 {
@@ -281,7 +281,7 @@ RESPONSE:
 ### user/login
 ##################
 POST:
-http://localhost:3000/user/login
+http://localhost:3001/user/login
 
 PAYLOAD:
 {
