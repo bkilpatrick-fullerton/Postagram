@@ -15,7 +15,7 @@
 ##################
 
 GET:
-http://localhost:3000/posts/myfeed
+http://localhost:3001/posts/myfeed
 
 PAYLOAD:
 {

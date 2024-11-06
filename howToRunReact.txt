@@ -1,0 +1,3 @@
+cd postgram-react
+npm install (could be some warning)
+npm start

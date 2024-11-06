@@ -1,0 +1,15 @@
+how to set up local db
+web based mongo atlas
+create project name postgram
+create cluster
+drivers
+create free version in west
+create user and copy user and password
+driver mongoose 
+
+
+how to run backend server
+cd back
+cd src
+npm install 
+npm start
