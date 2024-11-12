@@ -13,13 +13,14 @@ app.use(express.json());
 app.use("/user", userRoute);
 app.use("/posts", postRoute);
 
-const corsMethods = {
-    origin: 'http://localhost:3000/', 
+const CORS_CFG = {
+    origin: ['http://localhost:5173', `http://localhost:${PORT}`],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, 
-};
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  };
 
-app.use(cors(corsMethods));
+app.use(cors(CORS_CFG));
 
 //const DB_NAME = 'bktest';
 
