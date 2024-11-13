@@ -6,8 +6,13 @@ const PostSchema = new Schema({
   username: {type: String, required: true},
   hashtags: [String],
   created: {type: Date, default: Date.now},
-  likes: {type: Number, default: 0}
-
+  likes: {
+    type: [
+      {
+        username: { type: String, required: true },
+      },
+    ],
+  },
 });
 
 const Post = model("Post", PostSchema);
