@@ -9,7 +9,8 @@ driver mongoose
 
 
 how to run backend server
-cd back
+cd backend
 cd src
+node helpCreatetestData.js
 npm install 
 npm start
