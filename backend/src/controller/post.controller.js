@@ -62,7 +62,7 @@ export const removePostById = async (req, res) => {
   }
 };
 
-export const incrementlikes = async (postId) => {
+export const update_likes = async (postId) => {
   try{
     const updatedPost = await post.findPostsByUsername(
       postId,

@@ -9,7 +9,7 @@ import {
     getPostsByUsername,
     getPostsByHashtag,
     removePostById,
-    incrementlikes
+    update_likes
 } from "../controller/post.controller.js";
 
 
@@ -20,7 +20,7 @@ postRoute.get("/myfeed",  authenticate, getPostsByFeed);
 postRoute.get("/user/:username", authenticate, getPostsByUsername);
 postRoute.get("/hashtag/:hashtag", authenticate, getPostsByHashtag);
 postRoute.delete("/delete-post", authenticate, removePostById);
-postRoute.put('/posts/:_id/like', authenticate, incrementlikes)
+postRoute.put('/', authenticate, update_likes)
 
 
 export default postRoute;
