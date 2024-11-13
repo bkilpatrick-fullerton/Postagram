@@ -62,3 +62,17 @@ export const removePostById = async (req, res) => {
   }
 };
 
+export const incrementlikes = async (postId) => {
+  try{
+    const updatedPost = await post.findPostsByUsername(
+      postId,
+      {$inc: {likes: 1} },
+      {new: true}
+    );
+    console.log('Updated likes:', updatedPost.likes);
+    return updatedPost;
+  } catch (error) {
+    console.error('Error updating likes:', error);
+  }
+};
+
