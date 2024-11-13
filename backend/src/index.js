@@ -2,14 +2,25 @@ import express from "express";
 import { mongoose } from "mongoose";
 import userRoute from "./routes/user.route.js";
 import postRoute from "./routes/post.route.js";
+import cors from "cors";
 
 import "dotenv/config";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use("/user", userRoute);
 app.use("/posts", postRoute);
+
+const CORS_CFG = {
+    origin: ['http://localhost:5173', `http://localhost:${PORT}`],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  };
+
+app.use(cors(CORS_CFG));
 
 //const DB_NAME = 'bktest';
 
