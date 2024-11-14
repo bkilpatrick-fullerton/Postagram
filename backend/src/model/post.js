@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const PostSchema = new Schema({
-  titles: {type: String, required: true},
+  title: {type: String, required: true},
   postbody: {type: String, required: true},
   username: {type: String, required: true},
   hashtags: [String],
@@ -13,7 +13,10 @@ const PostSchema = new Schema({
       },
     ],
   },
-});
+  tags: { type: [String], default: [''] },
+},
+{ timestamps: true },
+);
 
 const Post = model("Post", PostSchema);
 
