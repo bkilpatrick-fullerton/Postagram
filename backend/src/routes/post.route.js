@@ -15,12 +15,13 @@ import {
 
 const postRoute = Router();
 
-postRoute.put("/add-post", authenticate, createNewPost)
-postRoute.get("/myfeed",  authenticate, getPostsByFeed);
-postRoute.get("/user/:username", authenticate, getPostsByUsername);
+postRoute.post('/', validateUser, createNewPost);
+postRoute.get('/',  authenticate, getPostsByFeed);
+postRoute.get("/u/:username", authenticate, getPostsByUsername);
 postRoute.get("/hashtag/:hashtag", authenticate, getPostsByHashtag);
 postRoute.delete("/delete-post", authenticate, removePostById);
 postRoute.put('/', authenticate, update_likes)
+postRoute.get('/search', validateUser, getPostsBySearch);
 
 
 export default postRoute;
