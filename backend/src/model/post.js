@@ -2,10 +2,8 @@ import { Schema, model } from "mongoose";
 
 const PostSchema = new Schema({
   title: {type: String, required: true},
-  postbody: {type: String, required: true},
+  content: {type: String, required: true},
   username: {type: String, required: true},
-  hashtags: [String],
-  created: {type: Date, default: Date.now},
   likes: {
     type: [
       {
