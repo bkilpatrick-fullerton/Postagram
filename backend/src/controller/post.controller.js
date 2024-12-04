@@ -62,3 +62,38 @@ export const removePostById = async (req, res) => {
   }
 };
 
+export const update_likes = async (req, res) => {
+  const { id: postId, increment: toIncrement } = req.body;
+  const username = getCookie(req)
+    .find((cookie) => cookie.startsWith('username'))
+    .split('=')[1];
+
+  try {
+    if (!username) {
+      return res.status(401).json({
+        error: {
+          message: 'Please Login to Like this Post',
+          isAuthorized: false,
+        },
+      });
+    }
+
+    if (!postId) {
+      return res.status(404).json({
+        error: { message: 'A PostID is mandatory to like or dislike' },
+      });
+    }
+
+    if (toIncrement) {
+      await updateLike({ id: postId, val: 1, username });
+    } else {
+      await updateLike({ id: postId, val: -1, username });
+    }
+
+    return res.status(200).json({ message: 'Updated like successfully' });
+  } catch (err) {
+    console.error('Error updating likes:', err);
+
+  }
+};
+
