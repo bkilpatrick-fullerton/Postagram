@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "lint": "eslint \"./**/*.js\" --quiet",
+    "lint:full": "eslint \"./**/*.js\"",
+    "lint:fix": "eslint --fix --ext .js ./src"
+  },
+  "author": "kourosh-alasti",
+  "license": "MIT",
+  "description": "Postagram Express Backend",
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "loglitely": "^1.2.1",
+    "mongoose": "^8.9.1",
+    "passjen": "^2.1.2"
+  }
+}

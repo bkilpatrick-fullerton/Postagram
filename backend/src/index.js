@@ -1,39 +1,64 @@
-import express from "express";
-import { mongoose } from "mongoose";
-import userRoute from "./routes/user.route.js";
-import postRoute from "./routes/post.route.js";
-import cors from "cors";
+import 'dotenv/config';
 
-import "dotenv/config";
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import { mongoose } from 'mongoose';
+
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/user.js';
+import postRoutes from './routes/post.js';
+import logger from './utils/logger.js';
+
+const PORT = process.env.NODE_PORT || 8000;
+const CONN_STR = process.env.MONGO_CONN_STRING || undefined;
+const JWT_SECRET = process.env.JWT_SECRET || undefined;
+
+const CORS_CFG = {
+  origin: [
+    'http://localhost:5173',
+    `http://localhost:${PORT}`,
+    'http://localhost:3000',
+    '*',
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+if (JWT_SECRET === undefined) {
+  logger.error('JWT Secret is not defined');
+  process.exit(1);
+}
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use("/user", userRoute);
-app.use("/posts", postRoute);
-
-const CORS_CFG = {
-    origin: ['http://localhost:5173', `http://localhost:${PORT}`],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  };
-
 app.use(cors(CORS_CFG));
+app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-//const DB_NAME = 'bktest';
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
-//const mongoConnectUrl = process.env.MONGO_CONNECT_URL //Ex: mongodb+srv://<user>:<password>@cpsc499-lads.czvu4.mongodb.net/
-//const mongoConnectParams = process.env.MONGO_CONNECT_PARAMS //Ex: ?retryWrites=true&w=majority&appName=CPSC499-LADS
-//const mongoConnectStr = mongoConnectUrl + DB_NAME + mongoConnectParams;
-const mongoConnectStr = process.env.MONGO_CONNECT_STR
+const initDatabaseConnection = async () => {
+  if (CONN_STR === undefined) {
+    logger.error('Undefined Connection URL');
+    process.exit(1);
+  }
 
-const mongoConnect = async () => {
-    await mongoose.connect(mongoConnectStr);
-    console.log(`DB connected`);
-}
+  await mongoose.connect(CONN_STR);
+  logger.debug('Database Connection Initialized');
+};
 
-mongoConnect();
+initDatabaseConnection().catch(() => {
+  logger.error('Something went wrong while connecting to database');
+  process.exit(1);
+});
 
-app.listen(3001, () => console.log(`server started on port 3001`));
+app.listen(PORT, () => {
+  logger.log(`Server started on Port: ${PORT}`);
+});
