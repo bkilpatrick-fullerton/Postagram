@@ -1,13 +1,24 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const UserSchema = new Schema({
-  username: {type: String, required: true, unique: true},
-  email: {type: String, required: true},
-  password: {type: String, default: "temp123"},
-  following: [String],
-  created: {type: Date, default: Date.now}
-});
+const UserSchema = new Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    salt: { type: String, require: true },
+    following: {
+      type: [
+        {
+          username: { type: String },
+          followingSince: { type: Date, default: Date.now },
+        },
+      ],
+      default: [],
+    },
+    posts: { type: Number, default: 0 },
+  },
+  { timestamps: true },
+);
 
-const User = model("User", UserSchema);
+const User = model('User', UserSchema);
 
 export default User;
