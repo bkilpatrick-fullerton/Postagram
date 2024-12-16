@@ -1,6 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const PostSchema = new Schema({
+const PostSchema = new Schema(
+  {
   title: {type: String, required: true},
   content: {type: String, required: true},
   username: {type: String, required: true},
@@ -13,7 +14,7 @@ const PostSchema = new Schema({
   },
   tags: { type: [String], default: [''] },
 },
-{ timestamps: true },
+  { timestamps: true },
 );
 
 const Post = model("Post", PostSchema);
