@@ -37,10 +37,11 @@ export const signup = async (req, res) => {
       .status(200)
       .cookie('postagramToken', token, {
         httpOnly: false,
-        secure: false,
+        secure: true,
         sameSite: 'none',
         path: '/',
-        domain: 'localhost',
+        //domain: 'localhost',
+        domain: 'postagram-frontend.onrender.com'
       })
       .cookie('username', username)
       .json({ message: 'User created successfully' });
