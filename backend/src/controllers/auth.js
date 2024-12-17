@@ -4,6 +4,9 @@ import { createUser, getUserByUsername } from '../queries/user.js';
 import { generateToken } from '../utils/jwt.js';
 import logger from '../utils/logger.js';
 
+import 'dotenv/config';
+const BACKEND_DOMAIN = process.env.BACKEND_DOMAIN || 'localhost';
+
 export const signup = async (req, res) => {
   // Pull Username and Password from Request Body
   const { username, password } = req.body;
@@ -41,7 +44,7 @@ export const signup = async (req, res) => {
         sameSite: 'none',
         path: '/',
         //domain: 'localhost',
-        domain: 'postagram-e3s2.onrender.com',
+        domain: BACKEND_DOMAIN,
       })
       .cookie('username', username)
       .json({ message: 'User created successfully' });
