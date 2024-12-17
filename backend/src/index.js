@@ -16,15 +16,17 @@ const CONN_STR = process.env.MONGO_CONN_STRING || undefined;
 const JWT_SECRET = process.env.JWT_SECRET || undefined;
 const BACKEND_DOMAIN = process.env.BACKEND_DOMAIN || undefined;
 
-const fullBackendDomain = 'https://' + BACKEND_DOMAIN
-logger.log(fullBackendDomain);
+if (BACKEND_DOMAIN === undefined) {
+  logger.error('Backend Domain is not defined');
+  process.exit(1);
+}
 
 const CORS_CFG = {
   origin: [
     'http://localhost:5173',
     `http://localhost:${PORT}`,
     'http://localhost:3000',
-    fullBackendDomain,
+    BACKEND_DOMAIN,
     'https://postagram-e3s2.onrender.com',
     'https://postagram-449.netlify.app',
   ],

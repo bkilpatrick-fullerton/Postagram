@@ -1,10 +1,12 @@
+import 'dotenv/config';
+
 import * as passjen from 'passjen';
 
 import { createUser, getUserByUsername } from '../queries/user.js';
 import { generateToken } from '../utils/jwt.js';
 import logger from '../utils/logger.js';
 
-import 'dotenv/config';
+
 const BACKEND_DOMAIN = process.env.BACKEND_DOMAIN || 'localhost';
 
 export const signup = async (req, res) => {
@@ -32,7 +34,7 @@ export const signup = async (req, res) => {
     // Generate JWT Token using username
     const token = generateToken(newUser.username);
 
-    logger.log("token generated: " + token)
+    logger.debug('token generated: ' + token);
 
     // Return 200 Code, store JWT in cookie for future auth
     // BUG:
@@ -43,7 +45,6 @@ export const signup = async (req, res) => {
         secure: true,
         sameSite: 'none',
         path: '/',
-        //domain: 'localhost',
         domain: BACKEND_DOMAIN,
       })
       .cookie('username', username)
@@ -109,7 +110,7 @@ export const signin = async (req, res) => {
         secure: true,
         sameSite: 'none',
         path: '/',
-        domain: 'localhost',
+        domain: BACKEND_DOMAIN,
       })
       .cookie('username', username)
       .json({ message: 'User signed in successfully' });
