@@ -16,23 +16,17 @@ const CONN_STR = process.env.MONGO_CONN_STRING || undefined;
 const JWT_SECRET = process.env.JWT_SECRET || undefined;
 const BACKEND_DOMAIN = process.env.BACKEND_DOMAIN || undefined;
 
-if (BACKEND_DOMAIN === undefined) {
-  logger.error('Backend Domain is not defined');
-  process.exit(1);
-}
-
-const BACKEND_URL = 'https://' + BACKEND_DOMAIN
+const fullBackendDomain = 'https://' + BACKEND_DOMAIN
+logger.log(fullBackendDomain);
 
 const CORS_CFG = {
   origin: [
-    '*',
     'http://localhost:5173',
     `http://localhost:${PORT}`,
     'http://localhost:3000',
-    BACKEND_URL,
+    fullBackendDomain,
     'https://postagram-e3s2.onrender.com',
     'https://postagram-449.netlify.app',
-    'https://postagram-backend-y7ps.onrender.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -54,26 +48,26 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://postagram-449.netlify.app",
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-//   );
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   res.setHeader("Access-Control-Allow-Private-Network", true);
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://postagram-449.netlify.app",
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
 
-//   res.setHeader("Access-Control-Max-Age", 7200);
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-//   next();
-// });
+  next();
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
