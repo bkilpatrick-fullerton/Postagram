@@ -41,7 +41,7 @@ export const signup = async (req, res) => {
         sameSite: 'none',
         path: '/',
         //domain: 'localhost',
-        domain: 'postagram-frontend.onrender.com'
+        domain: 'postagram-e3s2.onrender.com',
       })
       .cookie('username', username)
       .json({ message: 'User created successfully' });
