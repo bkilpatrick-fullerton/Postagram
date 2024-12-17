@@ -109,7 +109,8 @@ export const signin = async (req, res) => {
         secure: true,
         sameSite: 'none',
         path: '/',
-        domain: 'localhost',
+         //domain: 'localhost',
+        domain: BACKEND_DOMAIN,
       })
       .cookie('username', username)
       .json({ message: 'User signed in successfully' });
