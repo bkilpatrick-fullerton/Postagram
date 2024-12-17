@@ -29,13 +29,15 @@ export const signup = async (req, res) => {
     // Generate JWT Token using username
     const token = generateToken(newUser.username);
 
+    logger.log("token generated: " + token)
+
     // Return 200 Code, store JWT in cookie for future auth
     // BUG:
     return res
       .status(200)
       .cookie('postagramToken', token, {
         httpOnly: false,
-        secure: true,
+        secure: false,
         sameSite: 'none',
         path: '/',
         domain: 'localhost',
