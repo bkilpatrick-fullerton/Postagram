@@ -46,7 +46,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://postagram-449.netlify.app, http://localhost:5173, https://postagram-frontend.onrender.com/"
+    "https://postagram-449.netlify.app",
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
