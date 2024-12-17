@@ -1,4 +1,4 @@
-import logger from "./logger";
+import logger from "./logger.js";
 
 const getCookie = (req) => {
   // grab all cookies
