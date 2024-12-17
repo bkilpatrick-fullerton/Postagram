@@ -21,15 +21,18 @@ if (BACKEND_DOMAIN === undefined) {
   process.exit(1);
 }
 
+const BACKEND_URL = 'https://' + BACKEND_DOMAIN
+
 const CORS_CFG = {
   origin: [
     '*',
     'http://localhost:5173',
     `http://localhost:${PORT}`,
     'http://localhost:3000',
-    BACKEND_DOMAIN,
+    BACKEND_URL,
     'https://postagram-e3s2.onrender.com',
     'https://postagram-449.netlify.app',
+    'https://postagram-backend-y7ps.onrender.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
