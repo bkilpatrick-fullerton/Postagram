@@ -14,13 +14,18 @@ import logger from './utils/logger.js';
 const PORT = process.env.NODE_PORT || 8000;
 const CONN_STR = process.env.MONGO_CONN_STRING || undefined;
 const JWT_SECRET = process.env.JWT_SECRET || undefined;
+const BACKEND_DOMAIN = process.env.BACKEND_DOMAIN || undefined;
+
+const fullBackendDomain = 'https://' + BACKEND_DOMAIN
+logger.log(fullBackendDomain);
 
 const CORS_CFG = {
   origin: [
     'http://localhost:5173',
     `http://localhost:${PORT}`,
     'http://localhost:3000',
-    'https://postagram-frontend.onrender.com/',
+    fullBackendDomain,
+    'https://postagram-e3s2.onrender.com',
     'https://postagram-449.netlify.app',
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
