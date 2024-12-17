@@ -26,6 +26,8 @@ const CORS_CFG = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
+  privateNetwork: true,
+  maxAge: 86400,
 };
 
 if (JWT_SECRET === undefined) {
@@ -40,6 +42,27 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://postagram-449.netlify.app, http://localhost:5173, https://postagram-frontend.onrender.com/"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+
+  res.setHeader("Access-Control-Max-Age", 7200);
+
+  next();
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
